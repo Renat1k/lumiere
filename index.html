@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumière — салон краси та стилю</title>
+  <meta name="description" content="Lumière — мінімалістичний салон краси та стилю в Києві. Стрижки, борода, укладка та фарбування. Запис у Telegram.">
+  <meta name="theme-color" content="#f8fbfa">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2355c9be'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' text-anchor='middle' fill='%231e2a29'%3EL%3C/text%3E%3C/svg%3E">
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <style>
+    :root {
+      --aqua: #55c9be;
+      --aqua-deep: #2d9f96;
+      --aqua-soft: #e5f7f4;
+      --aqua-line: rgba(45, 159, 150, 0.28);
+      --ink: #1e2a29;
+      --ink-soft: #465451;
+      --muted: #74827f;
+      --line: #dce8e5;
+      --bg: #f8fbfa;
+      --white: #ffffff;
+      --dark: #1b2726;
+      --radius: 24px;
+      --shadow: 0 24px 60px -38px rgba(12, 58, 54, 0.28);
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --shell: 1140px;
+      --gutter: clamp(20px, 5vw, 40px);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(58rem 38rem at 90% -12%, rgba(85, 201, 190, 0.13), transparent 62%),
+        radial-gradient(45rem 32rem at -10% 40%, rgba(85, 201, 190, 0.06), transparent 65%),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+    }
+
+    ::selection {
+      background: var(--aqua);
+      color: var(--ink);
+    }
+
+    :focus-visible {
+      border-radius: 6px;
+      outline: 2px solid var(--aqua-deep);
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: min(calc(100% - (2 * var(--gutter))), var(--shell));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 200;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 13px;
+      transform: translateY(-180%);
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: none;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ---------- Header ---------- */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid transparent;
+      background: rgba(248, 251, 250, 0.78);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    .site-header.is-scrolled {
+      border-bottom-color: var(--line);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 14px 40px -35px rgba(12, 58, 54, 0.45);
+    }
+
+    .header-inner {
+      display: flex;
+      min-height: 84px;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      min-width: 0;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 39px;
+      height: 39px;
+      flex: none;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--aqua);
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      transition: transform 0.35s ease;
+    }
+
+    .brand:hover .brand-mark {
+      transform: rotate(-8deg);
+    }
+
+    .brand-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-name {
+      color: var(--ink);
+      font-size: 1.12rem;
+      font-weight: 600;
+      letter-spacing: -0.045em;
+    }
+
+    .brand-subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    /* ---------- Buttons ---------- */
+
+    .btn {
+      display: inline-flex;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.005em;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+      transition:
+        background-color 0.22s ease,
+        border-color 0.22s ease,
+        color 0.22s ease,
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      border-color: var(--aqua);
+      background: var(--aqua);
+      box-shadow: 0 12px 28px -18px rgba(45, 159, 150, 0.8);
+      color: var(--ink);
+    }
+
+    .btn-primary:hover {
+      border-color: var(--aqua-deep);
+      background: #67d4ca;
+    }
+
+    .btn-ghost {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--ink);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--aqua-deep);
+      background: var(--white);
+    }
+
+    .btn-small {
+      height: 42px;
+      padding-inline: 16px;
+      font-size: 12.5px;
+    }
+
+    /* ---------- Hero ---------- */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.78fr);
+      gap: clamp(36px, 7vw, 90px);
+      align-items: center;
+      padding-top: clamp(52px, 7vw, 90px);
+      padding-bottom: clamp(64px, 9vw, 120px);
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      animation: hero-rise 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--aqua-deep);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.17em;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 26px;
+      height: 1px;
+      background: var(--aqua-deep);
+      content: "";
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(3.5rem, 8vw, 6.8rem);
+      font-weight: 600;
+      letter-spacing: -0.07em;
+      line-height: 0.92;
+      text-wrap: balance;
+    }
+
+    .hero h1 .accent {
+      color: var(--aqua-deep);
+    }
+
+    .hero-lead {
+      max-width: 500px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 32px;
+    }
+
+    .hero-actions .btn {
+      height: 52px;
+      padding-inline: 24px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 11px 18px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    .rating {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .rating .star {
+      color: var(--aqua-deep);
+      font-size: 13px;
+    }
+
+    .rating small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 400;
+    }
+
+    .meta-divider {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--aqua-deep);
+      opacity: 0.7;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      min-height: 500px;
+      align-items: center;
+      justify-content: center;
+      animation: hero-rise 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.12s both;
+    }
+
+    .hero-visual::before {
+      position: absolute;
+      top: 12%;
+      left: 3%;
+      width: 78%;
+      height: 70%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(85, 201, 190, 0.25), transparent 66%);
+      content: "";
+      filter: blur(22px);
+    }
+
+    .hero-visual::after {
+      position: absolute;
+      top: 2%;
+      right: 2%;
+      width: 110px;
+      height: 110px;
+      border: 1px solid var(--aqua-line);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .mirror {
+      position: relative;
+      width: min(78%, 338px);
+      aspect-ratio: 0.72;
+      overflow: hidden;
+      border: 1px solid rgba(45, 159, 150, 0.3);
+      border-radius: 999px 999px 28px 28px;
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.94), rgba(229, 247, 244, 0.72) 45%, rgba(85, 201, 190, 0.24));
+      box-shadow:
+        0 40px 80px -48px rgba(12, 58, 54, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: rotate(2deg);
+    }
+
+    .mirror::before {
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(45, 159, 150, 0.22);
+      border-radius: 999px 999px 20px 20px;
+      content: "";
+    }
+
+    .mirror::after {
+      position: absolute;
+      right: -36%;
+      bottom: -10%;
+      width: 92%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 30%, rgba(85, 201, 190, 0.46), rgba(85, 201, 190, 0.06) 70%);
+      content: "";
+      filter: blur(2px);
+    }
+
+    .mirror-inner {
+      position: absolute;
+      top: 22%;
+      left: 50%;
+      width: 48%;
+      height: 45%;
+      border: 1px solid rgba(45, 159, 150, 0.18);
+      border-radius: 999px;
+      transform: translateX(-50%);
+    }
+
+    .mirror-label {
+      position: absolute;
+      right: 0;
+      bottom: 24px;
+      left: 0;
+      z-index: 1;
+      color: var(--ink-soft);
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 0.21em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .floating-card {
+      position: absolute;
+      bottom: 26px;
+      left: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      transform: rotate(-2deg);
+      backdrop-filter: blur(10px);
+    }
+
+    .floating-rating {
+      display: block;
+      color: var(--ink);
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .floating-rating span {
+      color: var(--aqua-deep);
+      font-size: 0.9rem;
+    }
+
+    .floating-caption {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+      line-height: 1.45;
+    }
+
+    .mini-card {
+      position: absolute;
+      top: 28px;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      max-width: 158px;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 45px -34px rgba(12, 58, 54, 0.4);
+      color: var(--ink-soft);
+      font-size: 10.5px;
+      line-height: 1.5;
+      transform: rotate(2deg);
+      backdrop-filter: blur(10px);
+    }
+
+    .mini-dot {
+      width: 6px;
+      height: 6px;
+      flex: none;
+      margin-top: 5px;
+      border-radius: 50%;
+      background: var(--aqua-deep);
+      box-shadow: 0 0 0 4px rgba(85, 201, 190, 0.14);
+    }
+
+    /* ---------- Sections ---------- */
+
+    .section {
+      padding-top: clamp(64px, 8vw, 108px);
+      padding-bottom: clamp(64px, 8vw, 108px);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 38px;
+    }
+
+    .section-head h2,
+    .gallery-copy h2,
+    .about-copy h2,
+    .contact-copy h2 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(2.2rem, 4.4vw, 3.55rem);
+      font-weight: 600;
+      letter-spacing: -0.055em;
+      line-height: 1.02;
+      text-wrap: balance;
+    }
+
+    .section-lead {
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      text-wrap: pretty;
+    }
+
+    /* ---------- Services ---------- */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: minmax(255px, 0.7fr) minmax(0, 1.3fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .services-aside {
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
+      padding: clamp(25px, 3.4vw, 34px);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(100% 80% at 100% 0%, rgba(85, 201, 190, 0.2), transparent 60%),
+        var(--dark);
+      color: var(--white);
+    }
+
+    .services-aside::before {
+      position: absolute;
+      right: -54px;
+      bottom: -66px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .services-aside .eyebrow {
+      position: relative;
+      color: var(--aqua);
+    }
+
+    .services-aside .eyebrow::before {
+      background: var(--aqua);
+    }
+
+    .services-aside h3 {
+      position: relative;
+      max-width: 280px;
+      margin: 0 0 14px;
+      color: var(--white);
+      font-size: clamp(1.35rem, 2vw, 1.7rem);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+    }
+
+    .services-aside p {
+      position: relative;
+      max-width: 285px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .aside-link {
+      position: relative;
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      color: var(--aqua);
+      font-size: 11.5px;
+      font-weight: 500;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .aside-link:hover {
+      gap: 12px;
+      color: var(--white);
+    }
+
+    .aside-hours {
+      position: relative;
+      display: grid;
+      gap: 3px;
+      margin-top: auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.13);
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .aside-hours strong {
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .services-table-wrap {
+      padding: 8px clamp(20px, 3.2vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .price-table thead th {
+      padding: 13px 0 14px;
+      border-bottom: 1px solid var(--ink);
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .price-table thead th:last-child {
+      text-align: right;
+    }
+
+    .price-table tbody th,
+    .price-table tbody td {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+      transition: background-color 0.2s ease;
+    }
+
+    .price-table tbody tr:last-child th,
+    .price-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .price-table tbody tr:hover th,
+    .price-table tbody tr:hover td {
+      background: rgba(229, 247, 244, 0.6);
+    }
+
+    .price-table tbody th {
+      text-align: left;
+    }
+
+    .service {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .service-index {
+      width: 18px;
+      flex: none;
+      color: var(--muted);
+      font-size: 8.5px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    .service-name strong {
+      display: block;
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+    }
+
+    .service-name small {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .price {
+      white-space: nowrap;
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 400;
+    }
+
+    .table-note {
+      margin: 14px 0 8px;
+      color: var(--muted);
+      font-size: 9.5px;
+      line-height: 1.5;
+    }
+
+    /* ---------- Gallery ---------- */
+
+    .gallery-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+      gap: clamp(24px, 5vw, 60px);
+      align-items: center;
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 56px);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background:
+        radial-gradient(90% 100% at 5% 0%, rgba(255, 255, 255, 0.9), transparent 55%),
+        linear-gradient(135deg, #e6f8f5, #f9fcfb 58%, #dff4f0);
+    }
+
+    .gallery-panel::after {
+      position: absolute;
+      top: -70px;
+      right: 6%;
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(45, 159, 150, 0.18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .gallery-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .gallery-copy .eyebrow {
+      margin-bottom: 13px;
+    }
+
+    .gallery-copy p:last-child {
+      max-width: 330px;
+      margin: 18px 0 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .gallery-empty {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      min-height: 250px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 34px 24px;
+      border: 1px dashed rgba(45, 159, 150, 0.4);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.58);
+      text-align: center;
+    }
+
+    .gallery-mark {
+      position: relative;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(45, 159, 150, 0.5);
+      border-radius: 13px;
+    }
+
+    .gallery-mark::before,
+    .gallery-mark::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: var(--aqua-deep);
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+
+    .gallery-mark::before {
+      width: 15px;
+      height: 1px;
+    }
+
+    .gallery-mark::after {
+      width: 1px;
+      height: 15px;
+    }
+
+    .gallery-empty p {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .gallery-empty span:last-child {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 9.5px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ---------- About ---------- */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+      gap: clamp(30px, 6vw, 80px);
+      align-items: center;
+      padding-top: clamp(8px, 2vw, 16px);
+      border-top: 1px solid var(--line);
+    }
+
+    .about-copy p:last-child {
+      max-width: 530px;
+      margin: 20px 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(1rem, 1.4vw, 1.1rem);
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 19px 15px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.74);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: clamp(1.55rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+
+    .stat strong span {
+      color: var(--aqua-deep);
+      font-size: 0.85em;
+    }
+
+    .stat small {
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    /* ---------- Contact ---------- */
+
+    .contact-section {
+      position: relative;
+      overflow: hidden;
+      padding-top: clamp(72px, 9vw, 112px);
+      padding-bottom: clamp(72px, 9vw, 112px);
+      background:
+        radial-gradient(55rem 36rem at 100% 0%, rgba(85, 201, 190, 0.14), transparent 62%),
+        var(--dark);
+      color: var(--white);
+    }
+
+    .contact-section::before {
+      position: absolute;
+      top: -130px;
+      left: 42%;
+      width: 310px;
+      height: 310px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .contact-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr);
+      gap: clamp(32px, 7vw, 90px);
+      align-items: center;
+    }
+
+    .contact-copy .eyebrow {
+      color: var(--aqua);
+    }
+
+    .contact-copy .eyebrow::before {
+      background: var(--aqua);
+    }
+
+    .contact-copy h2 {
+      max-width: 560px;
+      color: var(--white);
+    }
+
+    .contact-copy > p:last-of-type {
+      max-width: 430px;
+      margin: 20px 0 0;
+      color: rgba(255, 255, 255, 0.56);
+      font-size: 0.93rem;
+      line-height: 1.75;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .contact-section .btn-ghost {
+      border-color: rgba(255, 255, 255, 0.22);
+      background: transparent;
+      color: var(--white);
+    }
+
+    .contact-section .btn-ghost:hover {
+      border-color: var(--aqua);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .contact-card {
+      padding: clamp(22px, 3.4vw, 30px);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.045);
+      box-shadow: 0 28px 60px -45px rgba(0, 0, 0, 0.8);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 18px;
+      margin: 0;
+      font-style: normal;
+    }
+
+    .contact-details > div {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .contact-details dt {
+      color: rgba(255, 255, 255, 0.38);
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .contact-details dd {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .contact-details a {
+      transition: color 0.2s ease;
+    }
+
+    .contact-details a:hover {
+      color: var(--aqua);
+    }
+
+    .contact-note {
+      margin: 22px 0 0;
+      padding-top: 17px;
+      border-top: 1px solid rgba(255, 255, 255, 0.11);
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 9.5px;
+      line-height: 1.5;
+    }
+
+    /* ---------- Footer ---------- */
+
+    .site-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--dark);
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 10.5px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 20px;
+      padding-bottom: 24px;
+    }
+
+    .footer-inner a {
+      color: rgba(255, 255, 255, 0.62);
+      transition: color 0.2s ease;
+    }
+
+    .footer-inner a:hover {
+      color: var(--aqua);
+    }
+
+    /* ---------- Motion ---------- */
+
+    @keyframes hero-rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 1000px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(290px, 0.72fr);
+        gap: 30px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.4rem, 8vw, 5.4rem);
+      }
+
+      .hero-visual {
+        min-height: 450px;
+      }
+
+      .section-head {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        max-width: 720px;
+      }
+
+      .hero-visual {
+        width: min(100%, 480px);
+        min-height: 450px;
+        margin: 6px auto 0;
+      }
+
+      .mirror {
+        width: min(70%, 300px);
+      }
+
+      .section-head {
+        grid-template-columns: 1fr;
+        gap: 17px;
+      }
+
+      .section-lead {
+        max-width: 520px;
+      }
+
+      .services-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-table-wrap {
+        order: 1;
+      }
+
+      .services-aside {
+        order: 2;
+        min-height: 280px;
+      }
+
+      .services-aside p {
+        max-width: 440px;
+      }
+
+      .about-grid {
+        gap: 34px;
+      }
+
+      .about-stats {
+        max-width: 520px;
+      }
+
+      .gallery-panel {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .gallery-copy p:last-child {
+        max-width: 480px;
+      }
+
+      .contact-grid {
+        gap: 36px;
+      }
+
+      .contact-card {
+        max-width: 560px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      html {
+        scroll-padding-top: 28px;
+      }
+
+      .site-header {
+        position: relative;
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+        gap: 14px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .header-actions {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        order: 2;
+      }
+
+      .header-actions .btn {
+        width: 100%;
+        height: 44px;
+        padding-inline: 10px;
+        font-size: 12px;
+      }
+
+      .brand {
+        order: 1;
+      }
+
+      .hero {
+        padding-top: 42px;
+        padding-bottom: 68px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.15rem, 12.5vw, 4.7rem);
+      }
+
+      .hero-lead {
+        max-width: 500px;
+      }
+
+      .hero-visual {
+        min-height: 410px;
+      }
+
+      .section {
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+
+      .gallery-panel {
+        border-radius: 24px;
+      }
+
+      .about-stats {
+        max-width: 100%;
+      }
+
+      .site-footer .footer-inner {
+        flex-wrap: wrap;
+        gap: 8px 18px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand-subtitle {
+        font-size: 8px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.9rem, 13.2vw, 3.8rem);
+      }
+
+      .hero-visual {
+        min-height: 365px;
+      }
+
+      .mirror {
+        width: min(72%, 248px);
+      }
+
+      .hero-visual::after {
+        width: 76px;
+        height: 76px;
+      }
+
+      .floating-card {
+        bottom: 10px;
+        padding: 11px 12px;
+      }
+
+      .floating-rating {
+        font-size: 1.3rem;
+      }
+
+      .mini-card {
+        top: 12px;
+        max-width: 140px;
+        padding: 10px 11px;
+        font-size: 9.5px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-meta {
+        gap: 8px 13px;
+        font-size: 10.5px;
+      }
+
+      .services-table-wrap {
+        padding-inline: 16px;
+      }
+
+      .service {
+        gap: 8px;
+      }
+
+      .service-name strong {
+        font-size: 12.5px;
+      }
+
+      .service-name small {
+        font-size: 9.5px;
+      }
+
+      .price {
+        font-size: 12.5px;
+      }
+
+      .gallery-empty {
+        min-height: 220px;
+        padding: 28px 18px;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        padding: 15px 16px;
+      }
+
+      .stat strong {
+        min-width: 76px;
+        margin: 0;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .contact-actions .btn {
+        width: 100%;
+      }
+
+      .contact-details > div {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .js .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">До вмісту</a>
+
+  <header class="site-header" id="top">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Lumière — на початок">
+        <span class="brand-mark" aria-hidden="true">L</span>
+        <span class="brand-copy">
+          <span class="brand-name">Lumière</span>
+          <span class="brand-subtitle">Салон краси та стилю</span>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <a class="btn btn-primary btn-small" href="https://t.me/placeholder_bot" target="_blank" rel="noopener noreferrer">📅 Записаться</a>
+        <a class="btn btn-ghost btn-small" href="tel:+380000000000">📞 Позвонить</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Київ · з 2020 року</p>
+        <h1 id="hero-title">Менше<br>зайвого.<br><span class="accent">Більше вас.</span></h1>
+        <p class="hero-lead">Lumière — мінімалістичний салон краси в центрі Києва. Стрижки, борода, укладка та фарбування без зайвого шуму й зайвих деталей.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://t.me/placeholder_bot" target="_blank" rel="noopener noreferrer">📅 Записаться</a>
+          <a class="btn btn-ghost" href="tel:+380000000000">📞 Позвонить</a>
+        </div>
+
+        <div class="hero-meta">
+          <span class="rating"><span class="star">★</span> 4.7 <small>Google</small></span>
+          <span class="meta-divider" aria-hidden="true"></span>
+          <span>Пн–Сб · 10:00–20:00</span>
+          <span class="meta-divider" aria-hidden="true"></span>
+          <span>вул. Прикладна, 1</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mirror">
+          <span class="mirror-inner"></span>
+          <span class="mirror-label">hair · skin · style</span>
+        </div>
+        <div class="floating-card">
+          <span class="floating-rating">4.7<span>★</span></span>
+          <span class="floating-caption">Рейтинг<br>Google</span>
+        </div>
+        <div class="mini-card">
+          <span class="mini-dot"></span>
+          <span>Затишок<br>у центрі Києва</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="services" aria-labelledby="services-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Послуги</p>
+          <h2 id="services-title">Наші послуги та ціни</h2>
+        </div>
+        <p class="section-lead">Прозорий прайс без сюрпризів. Кожна послуга починається з короткої консультації, щоб результат був саме вашим.</p>
+      </div>
+
+      <div class="services-grid">
+        <aside class="services-aside">
+          <p class="eyebrow">Підхід</p>
+          <h3>Не знаєте, що обрати?</h3>
+          <p>Підберемо форму під структуру волосся, спосіб життя та настрій. Без нав'язаних послуг і зайвих процедур.</p>
+          <a class="aside-link" href="#contact">Порадитися щодо образу <span aria-hidden="true">→</span></a>
+          <div class="aside-hours">
+            <strong>Пн–Сб · 10:00–20:00</strong>
+            <span>Нд — вихідний</span>
+          </div>
+        </aside>
+
+        <div class="services-table-wrap">
+          <table class="price-table">
+            <caption class="sr-only">Послуги та ціни салону Lumière</caption>
+            <thead>
+              <tr>
+                <th scope="col">Послуга</th>
+                <th scope="col">Ціна</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <span class="service">
+                    <span class="service-index">01</span>
+                    <span class="service-name">
+                      <strong>Чоловіча стрижка</strong>
+                      <small>Консультація, миття, укладка</small>
+                    </span>
+                  </span>
+                </th>
+                <td class="price">300 <span>грн</span></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span class="service">
+                    <span class="service-index">02</span>
+                    <span class="service-name">
+                      <strong>Жіноча стрижка</strong>
+                      <small>Форма під структуру волосся</small>
+                    </span>
+                  </span>
+                </th>
+                <td class="price">600 <span>грн</span></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span class="service">
+                    <span class="service-index">03</span>
+                    <span class="service-name">
+                      <strong>Стрижка + борода</strong>
+                      <small>Комплексний чоловічий догляд</small>
+                    </span>
+                  </span>
+                </th>
+                <td class="price">450 <span>грн</span></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span class="service">
+                    <span class="service-index">04</span>
+                    <span class="service-name">
+                      <strong>Борода</strong>
+                      <small>Контур, форма та догляд</small>
+                    </span>
+                  </span>
+                </th>
+                <td class="price">250 <span>грн</span></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span class="service">
+                    <span class="service-index">05</span>
+                    <span class="service-name">
+                      <strong>Дитяча стрижка</strong>
+                      <small>Для гостей до 12 років</small>
+                    </span>
+                  </span>
+                </th>
+                <td class="price">200 <span>грн</span></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span class="service">
+                    <span class="service-index">06</span>
+                    <span class="service-name">
+                      <strong>Укладка</strong>
+                      <small>Повсякденна або вечірня</small>
+                    </span>
+                  </span>
+                </th>
+                <td class="price">350 <span>грн</span></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span class="service">
+                    <span class="service-index">07</span>
+                    <span class="service-name">
+                      <strong>Фарбування</strong>
+                      <small>Тон, догляд і природний блиск</small>
+                    </span>
+                  </span>
+                </th>
+                <td class="price">800 <span>грн</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-note">Ціни орієнтовні. Фінальна вартість залежить від довжини волосся та обраної техніки.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="gallery" aria-labelledby="gallery-title">
+      <div class="gallery-panel">
+        <div class="gallery-copy">
+          <p class="eyebrow">Портфоліо</p>
+          <h2 id="gallery-title">Галерея</h2>
+          <p>Кілька робіт красномовніші за слова. Незабаром тут з'являться фото з салону.</p>
+        </div>
+
+        <div class="gallery-empty">
+          <span class="gallery-mark" aria-hidden="true"></span>
+          <p>Фото робіт з'являться незабаром</p>
+          <span>Слідкуйте за оновленнями</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="about" aria-labelledby="about-title">
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="eyebrow">Про нас</p>
+          <h2 id="about-title">Тихо, тепло й по суті.</h2>
+          <p>Lumière — затишок та якість. Працюємо з 2020 року. Рейтинг 4.7★ на Google.</p>
+        </div>
+
+        <div class="about-stats" aria-label="Lumière у цифрах">
+          <div class="stat">
+            <strong>4.7<span>★</span></strong>
+            <small>Рейтинг на Google</small>
+          </div>
+          <div class="stat">
+            <strong>2020</strong>
+            <small>Рік заснування</small>
+          </div>
+          <div class="stat">
+            <strong>07</strong>
+            <small>Послуг у прайсі</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section reveal" id="contact" aria-labelledby="contact-title">
+      <div class="shell contact-grid">
+        <div class="contact-copy">
+          <p class="eyebrow">Контакти</p>
+          <h2 id="contact-title">Завітайте до Lumière.</h2>
+          <p>Напишіть у Telegram або зателефонуйте — підберемо зручний час і відповімо на всі запитання.</p>
+
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="https://t.me/placeholder_bot" target="_blank" rel="noopener noreferrer">📅 Записаться</a>
+            <a class="btn btn-ghost" href="tel:+380000000000">📞 Позвонить</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <address class="contact-details">
+            <div>
+              <dt>Телефон</dt>
+              <dd><a href="tel:+380000000000">+38 000 000 00 00</a></dd>
+            </div>
+            <div>
+              <dt>Адреса</dt>
+              <dd>вул. Прикладна, 1, Київ</dd>
+            </div>
+            <div>
+              <dt>Графік</dt>
+              <dd>Пн–Сб · 10:00–20:00<br>Нд — вихідний</dd>
+            </div>
+          </address>
+          <p class="contact-note">Найшвидше — написати в Telegram. Відповідаємо протягом робочого дня.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span>© <span id="year">2026</span> Lumière</span>
+      <span>Салон краси та стилю · Київ</span>
+      <a href="#top">Догори ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const header = document.querySelector(".site-header");
+      const year = document.querySelector("#year");
+      const reveals = Array.from(document.querySelectorAll(".reveal"));
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (year) year.textContent = String(new Date().getFullYear());
+
+      const onScroll = () => {
+        if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      const showAll = () => {
+        reveals.forEach((element) => element.classList.add("is-visible"));
+      };
+
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        showAll();
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+        );
+
+        reveals.forEach((element) => observer.observe(element));
+
+        window.setTimeout(() => {
+          reveals.forEach((element) => {
+            if (!element.classList.contains("is-visible")) element.classList.add("is-visible");
+          });
+        }, 2400);
+      }
+    })();
+  </script>
+</body>
+</html>
